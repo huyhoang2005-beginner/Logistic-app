@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.tmp
+data/inventory.json
+data/*.csv
+data/*.corrupt-*.json
+reports/*.png
+reports/*.xlsx
+.vscode/
