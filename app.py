@@ -1,13 +1,13 @@
 danh_sach_hang = [
     {
-        'id': 'LH01',
+        'id': 'GD01',
         'ten_hang': 'Khoai mi',
         'khoi_luong': 369.0,
         'don_gia': 3470,
         'loai_don': 'nhap',
     },
     {
-        'id': 'LH02',
+        'id': 'GD02',
         'ten_hang': 'Khoai mi',
         'khoi_luong': 50.0,
         'don_gia': 4200,
@@ -15,16 +15,19 @@ danh_sach_hang = [
     }
 ]
 
+def ma_hop_le(ma):
+    duoi = ma[2:]
+    return (ma.startswith("GD") and duoi.isascii()
+            and duoi.isdigit() and not duoi.startswith("0"))
 
 def kiem_tra_ma(ma_moi, danh_sach):
-    if len(ma_moi) != 4 or not ma_moi.startswith("LH") or not ma_moi[2:].isdigit():
-        print("Lỗi: Mã giao dịch phải gồm 4 ký tự (ví dụ: LH01).")
+    tap_hop_ma = {item['id'] for item in danh_sach}
+    if ma_moi in tap_hop_ma:
+        print("Lỗi: Mã giao dịch đã tồn tại.")
         return False
-    for item in danh_sach:
-        if item['id'] == ma_moi:
-            print("Lỗi: Mã giao dịch đã tồn tại.")
-            return False
-    return True
+    if not ma_hop_le(ma_moi):
+        print("Lỗi: Mã giao dịch phải bắt đầu bằng 'GD' và theo sau là 2 chữ số (ví dụ: GD01).")
+        return False
 
 
 def hien_thi_danh_sach(danh_sach):
